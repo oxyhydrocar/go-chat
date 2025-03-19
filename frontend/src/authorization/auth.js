@@ -20,7 +20,7 @@ class Auth {
 
   isAuthenticated() {
     var test = sessionStorage.getItem(this.sessionStorageUser);
-    return test;
+    return test !== null;
   }
 
   getUserName() {

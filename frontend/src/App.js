@@ -7,7 +7,6 @@ import ChatPage from './components/Chat/ChatPage';
 import LoginPage from './components/Login/LoginPage';
 import { ProtectedRoute } from './authorization/protected.route';
 
-// TODO dockerize
 class App extends Component {
 
   render() {

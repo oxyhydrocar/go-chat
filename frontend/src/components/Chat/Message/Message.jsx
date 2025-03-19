@@ -26,4 +26,4 @@ class Message extends Component {
   }
 }
 
-export default Message
+export default Message;

@@ -48,7 +48,6 @@ class ChatPage extends Component {
   handleSocketEvent(event) {
     switch (event.type) {
       case "close":
-        // TODO notify user about logout due to websocket closed
         this.handleLogout()
         break;
       case "message":

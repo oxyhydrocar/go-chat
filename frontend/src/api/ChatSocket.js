@@ -3,8 +3,6 @@ class ChatSocket {
   _socketEndpoint;
   _socket;
 
-  // TODO allow user to pass option
-  // which will dissallow users from the same ip
   constructor(socketEndpoint, 
               userName,
               userId,
