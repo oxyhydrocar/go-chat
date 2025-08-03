@@ -18,11 +18,6 @@ class Auth {
     cb();
   }
 
-  isAuthenticated() {
-    var test = sessionStorage.getItem(this.sessionStorageUser);
-    return test;
-  }
-
   getUserName() {
     return JSON.parse(sessionStorage.getItem(this.sessionStorageUser))._name;
   }
