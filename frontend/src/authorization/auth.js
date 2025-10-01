@@ -32,6 +32,10 @@ class Auth {
   }
 
   createGuid() {  
+    /**
+     * Generate a 4-character hexadecimal string.
+     * @returns {string} A 4-character string containing lowercase hexadecimal digits (0-9, a-f).
+     */
     function S4() {  
        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);  
     }  

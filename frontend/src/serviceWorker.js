@@ -20,6 +20,15 @@ const isLocalhost = Boolean(
     )
 );
 
+/**
+ * Registers the production service worker when supported and the app is served from the same origin.
+ *
+ * If running on localhost, verifies the service worker file before attempting registration and logs guidance to the console; otherwise registers the worker directly after the window load event.
+ *
+ * @param {Object} [config] - Optional configuration callbacks.
+ * @param {(registration: ServiceWorkerRegistration) => void} [config.onSuccess] - Called when a service worker is installed for the first time with the registration.
+ * @param {(registration: ServiceWorkerRegistration) => void} [config.onUpdate] - Called when a new service worker takes over and new content is available.
+ */
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -54,6 +63,14 @@ export function register(config) {
   }
 }
 
+/**
+ * Register a service worker at the given URL and handle its update lifecycle.
+ *
+ * @param {string} swUrl - URL of the service worker script to register.
+ * @param {{onUpdate?: function(Registration), onSuccess?: function(Registration)}=} config - Optional callbacks.
+ * @param {function(Registration)} [config.onUpdate] - Called when a new service worker has been installed and will activate after existing clients are closed.
+ * @param {function(Registration)} [config.onSuccess] - Called when the service worker is installed for the first time and content is cached for offline use.
+ */
 function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
@@ -98,6 +115,14 @@ function registerValidSW(swUrl, config) {
     });
 }
 
+/**
+ * Verify that the service worker script exists; if missing or not JavaScript, unregister any existing service worker and reload the page, otherwise proceed with normal registration.
+ *
+ * Fetches the provided swUrl with a Service-Worker header to confirm the script is present and is JavaScript. If the response is 404 or not JavaScript, unregisters the active service worker (if any) and reloads the page. If the fetch fails (e.g., offline), logs that the app is running in offline mode. If the script is valid, calls registerValidSW(swUrl, config).
+ *
+ * @param {string} swUrl - URL of the service worker script to validate.
+ * @param {Object} [config] - Optional lifecycle callbacks passed through to registration handlers (e.g., onUpdate, onSuccess).
+ */
 function checkValidServiceWorker(swUrl, config) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl, {
@@ -128,6 +153,11 @@ function checkValidServiceWorker(swUrl, config) {
     });
 }
 
+/**
+ * Unregister any active service worker for the current origin if supported by the browser.
+ *
+ * If the browser supports service workers, waits for the service worker to become ready and requests unregistration.
+ */
 export function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready

@@ -26,6 +26,13 @@ type Pool struct {
 	_cleanupHeartbeatIntervalMins time.Duration
 }
 
+// NewPool constructs and returns a Pool configured with message retention and cleanup limits.
+// 
+// messageLimit specifies the maximum number of messages to retain in the pool's history.
+// expirationLimitHrs is the duration after which messages are considered expired and eligible for removal.
+// cleanupHeartbeatIntervalMins is the interval used to trigger periodic cleanup of expired messages.
+// 
+// The returned Pool is initialized and ready to accept registrations, broadcasts, and unregistrations.
 func NewPool(messageLimit int, expirationLimitHrs time.Duration, cleanupHeartbeatIntervalMins time.Duration) *Pool {
 	return &Pool{
 		Register:                      make(chan *Client),
