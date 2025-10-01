@@ -53,6 +53,8 @@ func (c *ChatServer) ServeWebSocket(pool *websocket.Pool, w http.ResponseWriter,
 	client.Read()
 }
 
+// GetColor selects a hexadecimal color string at random from the set Turquoise, Orange, and Red.
+// The returned value will be one of the constants Turquoise, Orange, or Red.
 func GetColor() string {
 	var colorList = [3]string{Turquoise, Orange, Red}
 	rand.Seed(time.Now().Unix())
@@ -68,6 +70,7 @@ func (c *ChatServer) SetupRoutes() {
 	})
 }
 
+// main initializes a ChatServer, sets up HTTP routes for the WebSocket chat, and starts the HTTP server listening on :8080.
 func main() {
 	chatServer := ChatServer{make([]websocket.MessageData, 0)}
 
